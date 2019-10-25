@@ -23,7 +23,9 @@
 
 	<div class="row text-center text-lg-left">
 
+
 		<?php foreach ($all_images as $images): ?>
+
 			<div class="col-lg-3 col-md-4 col-6">
 				<a href="<?php echo base_url();?>uploads/<?php echo $images->file_name ?> " class="d-block mb-4 h-100">
 					<img class="img-fluid img-thumbnail" src="<?php echo base_url();?>uploads/<?php echo $images->file_name ?> " alt="memes images">
@@ -31,10 +33,16 @@
 			</div>
 
 		<?php  endforeach; ?>
-
 	</div>
-
+	<?php echo $this->pagination->create_links();?>
 </div>
 
+<!--<ul class="pagination">-->
+<!--	<li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
+<!--	<li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--	<li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--	<li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--	<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+<!--</ul>-->
 
 <?php $this->load->view('main_views/footer'); ?>

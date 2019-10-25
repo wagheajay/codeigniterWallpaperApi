@@ -52,7 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+//pagination short route to get uri segment
+$route['dashboard/(:num)'] = 'dashboard/dashboard/index/$1';
+//dashboard route
 $route['dashboard'] = 'dashboard/dashboard';
+//category route
 $route['dashboard/category'] = 'dashboard/dashboard/category';
+//upload route
 $route['dashboard/upload'] = 'dashboard/dashboard/upload';
+//wallpaper display by id route
 $route['dashboard/wallpaper_display/(:num)'] = 'dashboard/dashboard/display_category_wallpaper/$1';

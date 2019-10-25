@@ -7,10 +7,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller
 {
 
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->load->library('pagination');
+	}
 
 	public function index()
 	{
-		$data['all_images'] = $this->wallpaper_model->get_all_images();
+		$config = array(
+
+			'base_url' => base_url()."dashboard",
+			'per_page' => 8,
+			'total_rows' => $this->wallpaper_model->get_wallpapers_rows()
+		);
+
+		//config for bootstrap pagination class integration
+		// Bootstrap 4, work very fine.
+		$config['full_tag_open'] = '<ul class="pagination justify-content-center">';
+		$config['full_tag_close'] = '</ul>';
+		$config['attributes'] = array('class' => 'page-link');
+		$config['first_link'] = 'First Page';
+		$config['last_link'] = 'Last Page';
+		$config['first_tag_open'] = '<li class="page-item">';
+		$config['first_tag_close'] = '</li>';
+		$config['prev_link'] = 'Prev';
+		$config['prev_tag_open'] = '<li class="page-item">';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_link'] = 'Next';
+		$config['next_tag_open'] = '<li class="page-item">';
+		$config['next_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li class="page-item">';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="page-item active"><a href="#" class="page-link">';
+		$config['cur_tag_close'] = '<span class="sr-only">(current)</span></a></li>';
+		$config['num_tag_open'] = '<li class="page-item">';
+		$config['num_tag_close'] = '</li>';
+
+		$this->pagination->initialize($config);
+
+		$page = $this->uri->segment(2);
+
+		$data['all_images'] = $this->wallpaper_model->get_all_images($config['per_page'],$page);
 		$this->load->view('dashboard', $data);
 
 	}

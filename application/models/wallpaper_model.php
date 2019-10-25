@@ -81,11 +81,26 @@ class Wallpaper_Model extends CI_Model
 	}
 
 
-	public function get_all_images()
+	public function get_all_images($limit,$offset)
 	{
 
-		$query = $this->db->get('uploads_table');
+		 $query = $this->db->select()
+		                   ->from('uploads_table')
+			               ->order_by('id','DESC')
+		                   ->limit($limit,$offset)
+		                   ->get();
+
+//		         $this->db->order_by('id','DESC');
+//		$query = $this->db->get('uploads_table',$limit,$offset);
 		return $query->result();
+	}
+
+	public function get_wallpapers_rows()
+	{
+		$query = $this->db->get('uploads_table');
+		return $query->num_rows();
+
+
 	}
 
 	public function insert_image($image_data){
